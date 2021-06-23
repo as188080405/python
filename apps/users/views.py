@@ -23,8 +23,9 @@ from django_redis import get_redis_connection
 logger = logging.getLogger('django')
 
 
+# 获取注册页面
 class RegisterView(View):
-    # 获取注册页面
+
     def get(self, request):
         return render(request, 'register.html')
 
@@ -75,8 +76,8 @@ class RegisterView(View):
         return redirect(reverse('contents:index'))
 
 
+# 验证用户名是否重复
 class UsernameCountView(View):
-    """ 验证用户名是否重复 """
     def get(self, request, username):
         try:
             count = User.objects.filter(username=username).count()
@@ -86,8 +87,8 @@ class UsernameCountView(View):
         return http.JsonResponse({'code': RETCODE.OK, 'count': count})
 
 
+# 验证手机号是否重复
 class MobileCountView(View):
-    """ 验证手机号是否重复 """
     def get(self, request, mobile):
         try:
             count = User.objects.filter(mobile=mobile).count()
@@ -97,8 +98,9 @@ class MobileCountView(View):
         return http.JsonResponse({'code': RETCODE.OK, 'count': count})
 
 
+# 发送短信验证码
 class SMSCodeView(View):
-    """ 发送短信验证码 """
+
     def get(self, request, mobile):
         try:
             # 获取参数
@@ -145,3 +147,9 @@ class SMSCodeView(View):
         send_sms_code.delay(mobile, sms_code)
         # 响应结果
         return http.JsonResponse({'code': RETCODE.OK, 'errmsg': '发送短信成功'})
+
+
+# 用户登陆
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')

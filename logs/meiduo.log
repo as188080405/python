@@ -1999,3 +1999,10 @@ INFO 2021-06-23 10:36:01,624 basehttp 124 "GET /sms_codes/15009718757?image_code
 INFO 2021-06-23 10:36:01,639 basehttp 124 "GET /mobile/15009718757/count/ HTTP/1.1" 200 25
 INFO 2021-06-23 10:36:01,646 basehttp 124 "GET /sms_codes/15009718757/?image_code=RFBW&uuid=cdf29c83-9bab-44f1-a835-0c86b73ea879 HTTP/1.1" 200 131
 INFO 2021-06-23 10:36:01,667 basehttp 124 "GET /image_code/8e300fbb-7722-4077-9a41-67451c57581c/ HTTP/1.1" 200 3268
+WARNING 2021-06-23 16:40:09,703 base 152 Not Found: /
+WARNING 2021-06-23 16:40:09,705 basehttp 124 "GET / HTTP/1.1" 404 3274
+INFO 2021-06-23 16:40:19,046 basehttp 124 "GET /login/ HTTP/1.1" 200 2698
+INFO 2021-06-23 16:40:19,092 basehttp 124 "GET /static/images/logo02.png HTTP/1.1" 200 8466
+INFO 2021-06-23 16:40:19,272 basehttp 124 "GET /static/js/login.js HTTP/1.1" 200 1759
+INFO 2021-06-23 16:40:19,293 basehttp 124 "GET /static/images/QQ-weixin.png HTTP/1.1" 200 1816
+INFO 2021-06-23 16:40:19,348 basehttp 124 "GET /static/images/login_banner.png HTTP/1.1" 200 319312
