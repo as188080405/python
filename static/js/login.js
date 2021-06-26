@@ -23,7 +23,7 @@ var vm = new Vue({
             }
         },
 		// 检查密码
-        check_pwd: function(){
+        check_password: function(){
         	var re = /^[0-9A-Za-z]{8,20}$/;
 			if (re.test(this.password)) {
                 this.error_pwd = false;
@@ -34,7 +34,7 @@ var vm = new Vue({
         // 表单提交
         on_submit: function(){
             this.check_username();
-            this.check_pwd();
+            this.check_password();
 
             if (this.error_username == true || this.error_pwd == true) {
                 // 不满足登录条件：禁用表单

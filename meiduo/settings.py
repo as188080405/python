@@ -134,6 +134,9 @@ STATIC_URL = '/static/'
 # 静态文件加载路径
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# 指定自定义的用户认证后端
+AUTHENTICATION_BACKENDS = ['apps.users.utils.UsernameMobileAuthBackend']
+
 # 允许哪些主机访问
 ALLOWED_HOSTS = ['127.0.0.1', 'www.meiduo.site127.0.0.1', 'www.meiduo.site']
 

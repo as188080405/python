@@ -24,13 +24,17 @@
 				</div>
 				<div class="form_con">
 					<div class="form_input cur">
-						<form method="post" class="login">
-							<input type="text" name="username" v-model="username" class="name_input" placeholder="请输入用户">
+						<form method="post" class="login" @submit="on_submit" v-cloak>
+                            {{ csrf_input }}
+							<input type="text" name="username" v-model="username" @blur="check_username" class="name_input" placeholder="请输入用户">
 							<div class="user_error" v-show="error_username">[[error_username_message]]</div>
-                            <input type="password" name="username" v-model="password"  class="pass_input" placeholder="请输入密码">
+                            <input type="password" name="password" v-model="password" @blur="check_password"  class="pass_input" placeholder="请输入密码">
 							<div class="pwd_error"  v-show="error_password">[[error_password_message]]</div>
+                            {% if account_errmsg %}
+                                <div class="pwd_error"  >{{ account_errmsg }}</div>
+                            {% endif %}
 							<div class="more_input clearfix">
-								<input type="checkbox" name="remembered">
+								<input type="checkbox" name="remembered" v-model="remembered">
 								<label>记住登录</label>
 							</div>
 							<input type="submit" value="登 录" class="input_submit">

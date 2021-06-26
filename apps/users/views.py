@@ -3,7 +3,7 @@ import logging
 from random import randint
 
 from django import http
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.db import DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -73,7 +73,11 @@ class RegisterView(View):
             return render(request, 'register.html', {'register_errmsg': '注册失败！'})
         # 实现状态保持
         login(request, user)
-        return redirect(reverse('contents:index'))
+        # 重定向到首页
+        response = redirect(reverse('contents:index'))
+        # 登录后，用于展示用户名
+        response.set_cookie('username', user.username, max_age=3600 * 24 * 15)
+        return response
 
 
 # 验证用户名是否重复
@@ -151,5 +155,37 @@ class SMSCodeView(View):
 
 # 用户登陆
 class LoginView(View):
+
     def get(self, request):
         return render(request, 'login.html')
+
+    def post(self, request):
+        # 获取请求参数
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        remembered = request.POST.get('remembered')
+        # 判断请求参数
+        if not all([username, password]):
+            return http.HttpResponseBadRequest('缺少必传参数')
+        if not re.match(r'^[a-zA-Z0-9_]{5,20}$', username):
+            return http.HttpResponseBadRequest('请输入正确的用户名或手机号')
+        if not re.match(r'^[a-zA-Z0-9]{8,20}$', password):
+            return http.HttpResponseBadRequest('密码最少8位，最长20位')
+        # 验证用户名密码
+        user = authenticate(username=username, password=password)
+        # 验证失败响应
+        if user is None:
+            return render(request, 'login.html', {'account_errmsg': '用户名或密码错误'})
+        # 验证成功 - 实现状态保持
+        login(request, user)
+        # 设置状态保持的周期
+        if remembered != 'on':
+            request.session.set_expiry(0)
+        else:
+            request.session.set_expiry(None)
+        # 登录成功，重定向到首页
+        response = redirect(reverse('contents:index'))
+        # 登录后，用于展示用户名
+        response.set_cookie('username', user.username, max_age=3600 * 24 * 15)
+        return response
+
