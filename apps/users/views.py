@@ -3,7 +3,7 @@ import logging
 from random import randint
 
 from django import http
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.db import DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -189,3 +189,16 @@ class LoginView(View):
         response.set_cookie('username', user.username, max_age=3600 * 24 * 15)
         return response
 
+
+# 用户退出登录
+class LogoutView(View):
+
+    # 用户退出登录
+    def get(self, request):
+        # 调用django用户认证系统提供的，退出登录函数
+        logout(request)
+        # 重定向到登录页
+        response = redirect(request, 'login.html')
+        # 删除用户名cookie
+        response.delete_cookie('username')
+        return response
