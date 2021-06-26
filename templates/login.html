@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../static/js/axios-0.18.0.min.js"></script>
 </head>
 <body>
-	<div id="app" v-cloak>
+	<div id="app">
 	<div class="login_top clearfix">
 		<a href="index.html" class="login_logo"><img src="../static/images/logo02.png"></a>
 	</div>
@@ -28,7 +28,7 @@
                             {{ csrf_input }}
 							<input type="text" name="username" v-model="username" @blur="check_username" class="name_input" placeholder="请输入用户">
 							<div class="user_error" v-show="error_username">[[error_username_message]]</div>
-                            <input type="password" name="password" v-model="password" @blur="check_password"  class="pass_input" placeholder="请输入密码">
+                            <input type="password" name="password" v-model="password" @blur="check_password" class="pass_input" placeholder="请输入密码">
 							<div class="pwd_error"  v-show="error_password">[[error_password_message]]</div>
                             {% if account_errmsg %}
                                 <div class="pwd_error"  >{{ account_errmsg }}</div>

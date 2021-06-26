@@ -14,8 +14,8 @@ var vm = new Vue({
     },
     methods: {
         // 检查账号
-        check_username: function(){
-        	var re = /^[a-zA-Z0-9_-]{5,20}$/;
+        check_username:function(){
+        	let re = /^[a-zA-Z0-9_-]{5,20}$/;
 			if (re.test(this.username)) {
                 this.error_username = false;
             } else {
@@ -23,16 +23,16 @@ var vm = new Vue({
             }
         },
 		// 检查密码
-        check_password: function(){
-        	var re = /^[0-9A-Za-z]{8,20}$/;
+        check_password:function(){
+        	let re = /^[0-9A-Za-z]{8,20}$/;
 			if (re.test(this.password)) {
-                this.error_pwd = false;
+                this.error_password = false;
             } else {
-                this.error_pwd = true;
+                this.error_password = true;
             }
         },
         // 表单提交
-        on_submit: function(){
+        on_submit:function(){
             this.check_username();
             this.check_password();
 
@@ -42,9 +42,9 @@ var vm = new Vue({
             }
         },
         // qq登录
-        qq_login: function(){
-            var next = get_query_string('next') || '/';
-            var url = this.host + '/qq/login/?next=' + next;
+        qq_login:function(){
+            let next = get_query_string('next') || '/';
+            let url = this.host + '/qq/login/?next=' + next;
             axios.get(url, {
                     responseType: 'json'
                 })
