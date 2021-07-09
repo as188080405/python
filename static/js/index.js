@@ -1,4 +1,4 @@
-var vm = new Vue({
+let vm = new Vue({
     el: '#app',
     // 修改Vue变量的读取语法，避免和django模板语法冲突
     delimiters: ['[[', ']]'],
@@ -10,14 +10,29 @@ var vm = new Vue({
         cart_total_count: 0, // 购物车总数量
         carts: [], // 购物车数据,
         username:'',
+        is_username:false,
     },
     mounted(){
         // 获取购物车数据
         // this.get_carts();
-        this.username=getCookie('username');
-        console.log(this.username);
+        let _this = this
+        _this.username = getCookie("username");
+        console.log(_this.username);
+
+        // this.get_is_username()
     },
     methods: {
+        //
+        // get_is_username(){
+        //     this.username = getCookie("username")
+        //     if (this.username == ""){
+        //         console.log("username为空")
+        //         this.is_username = false
+        //     }else{
+        //         console.log("username不为空")
+        //         this.is_username = true
+        //     }
+        // },
         // 获取购物车数据
         get_carts(){
             let url = this.host+'/carts/simple/';

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'demo.apps.DemoConfig',
     'apps.users',
     'apps.contents',
-    'apps.verifications'
+    'apps.verifications',
+    'apps.oauth',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +130,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+# 用户未登录，跳转路径
+LOGIN_URL = '/login/'
 
 STATIC_URL = '/static/'
 # 静态文件加载路径

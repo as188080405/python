@@ -4,6 +4,7 @@ from random import randint
 
 from django import http
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -202,3 +203,6 @@ class LogoutView(View):
         # 删除用户名cookie
         response.delete_cookie('username')
         return response
+
+
+
